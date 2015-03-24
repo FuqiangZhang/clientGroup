@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:gravity="top"
+    tools:context="com.group5.client.menu.ProductDetail" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/textview_border" >
+
+        <TextView
+            android:id="@+id/tv_StoreName"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/iv_Product"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:text="$1.98/LB"
+            android:textColor="#ff00ff00" />
+
+        <TextView
+            android:id="@+id/tv_ProductDetail"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/tv_StoreDetail"
+            android:layout_below="@+id/iv_Product"
+            android:layout_marginLeft="10dp"
+            android:text="Walmart Supercenter"
+            android:textColor="#070707" />
+
+        <TextView
+            android:id="@+id/tv_StoreDetail"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_ProductDetail"
+            android:layout_marginLeft="10dp"
+            android:text="4800 US287 Highway\nArlington TX, 76017"
+            android:textColor="#000000" />
+
+        <ImageView
+            android:id="@+id/iv_Product"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/menu_shoppinglist" />
+
+        <TextView
+            android:id="@+id/tv_ProductName"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:text="Gala Apple"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#070707" />
+
+        <Button
+            android:id="@+id/bt_go"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_StoreDetail"
+            android:layout_alignLeft="@+id/iv_Product"
+            android:layout_alignRight="@+id/iv_Product"
+            android:layout_alignTop="@+id/tv_StoreDetail"
+            android:text="Go" />
+
+        <Button
+            android:id="@+id/All"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/bt_go"
+            android:layout_alignTop="@+id/tv_StoreDetail"
+            android:layout_toLeftOf="@+id/bt_go"
+            android:layout_toRightOf="@+id/tv_ProductDetail"
+            android:text="ShowAll" />
+
+        <TextView
+            android:id="@+id/tv_Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/All"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/All"
+            android:layout_toRightOf="@+id/tv_ProductDetail"
+            android:text="TextView"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ff0000" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webView1"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1" />
+
+</RelativeLayout>

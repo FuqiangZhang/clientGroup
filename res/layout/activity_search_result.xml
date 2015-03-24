@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:gravity="center_vertical"
+    tools:context="com.group5.client.menu.SearchResultActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rl_searchBar_search_result"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#0065ff"
+        android:gravity="top" >
+
+        <SearchView
+            android:id="@+id/sv_searchProduct_search_result"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+             >
+        </SearchView>
+
+
+    </RelativeLayout>
+    <com.group5.widget.SlideCutListView
+        android:id="@+id/lv_products_search_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/rl_searchBar_search_result"
+        android:text="Search" >
+    </com.group5.widget.SlideCutListView>
+
+    <ProgressBar
+        android:id="@+id/pb_search_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+</RelativeLayout>

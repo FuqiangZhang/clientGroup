@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>        
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Directions service</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      #panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var arlington = new google.maps.LatLng(32.7355556, -97.1077778);
+  var mapOptions = {
+    zoom:15,
+    center: arlington
+  };
+  
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  directionsDisplay.setMap(map);
+  var s =new QueryString();
+ // alert(s.operation);
+  //alert(s.gpsinfo);
+  if(s.operation == 1){
+      var mlat = s.mlat;
+      var mlng = s.mlng;
+      var dlat = s.dlat;
+      var dlng = s.dlng;
+      calcRoute(mlat,mlng,dlat,dlng);
+  }
+  else{
+      var locations = s.gpsinfo;
+	  //alert(locations);
+	  var array = locations.split(";");
+	  for(i=0;i<array.length;i++){
+		  var store = array[i].split(",");
+		  for(j=0;j<store.length;j++){
+			  	//alert(store[j]);
+				var locations = new Array();
+				var lat = store[1].split("=")[1];
+				var lng = store[2].split("=")[1];
+				var storename = store[0].split("=")[1];
+				var price = store[3].split("=")[1];
+				var name = store[4].split("=")[1];
+				locations[0]=lat;
+				locations[1]=lng;
+				locations[2]=storename;
+				locations[3]=price;
+				locations[4]=name;
+				setMarkers(i,map,locations);
+			  }
+		  }
+      
+  }
+}
+
+//build marker and information window
+function setMarkers(i,map, locations){
+	alert(locations[0]);
+    var marker;
+    var m;
+    for(m = 0; m < locations.length; m++){
+        var lat = locations[0];
+        var lng =  locations[1];
+        var storename = locations[2];
+        var price = '$'+locations[3];
+        var name = locations[4];
+        setInfowindows(i,lat,lng,storename,price,name);
+  //      latlngset = new google.maps.LatLng(lat,lng);
+        
+  //      marker = new google.maps.Marker({
+   //         map:map,
+  //          title:storename,
+  //          position:latlngset
+  //      });
+   //     map.setCenter(marker.getPosition())
+        
+        
+   //     var content = "StoreName: "  + '</h3>' + "Prices: "
+        
+   //     var infowindow = new google.maps.InfoWindow()
+   //     infowindow.setContent(content);
+    //    infowindow.open(map, marker);
+    }
+}
+function setInfowindows(m,slat,slng,sName,sPrice,name){
+		var myLatlng = new google.maps.LatLng(slat,slng);
+		
+		var infowindow = new google.maps.InfoWindow({
+		    content:'<a onclick='+'"window.demo.clickOnAndroid('+m+')">'+name+' in '+sName+' sold '+sPrice+'</a>',
+		  
+		   // pixelOffset:1,
+		});
+		
+		var marker = new google.maps.Marker({
+		    position: myLatlng,
+		    map: map,
+		    title:"Uluru (Ayers Rock)"
+		});
+		
+		//google.maps.event.addListener(marker, 'click', function() {
+		  infowindow.open(map,marker);
+		  
+		//});
+	}
+
+function calcRoute(mlat,mlng,dlat,dlng) {
+  //initialize();
+  //var s =new QueryString();
+ 
+  var start = new google.maps.LatLng(mlat,mlng);
+  var end = new google.maps.LatLng(dlat,dlng);      
+       
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode.DRIVING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', calcRoute);
+
+    </script>
+    
+    <script type="text/javascript">
+	
+	
+	 function QueryString()
+{      // alert("test");
+    //构造参数对象并初始化 
+    var name,value,i; 
+    var str=location.href;//获得浏览器地址栏URL串 
+    var num=str.indexOf("?") ;
+    str=str.substr(num+1);//截取"?"后面的参数串 
+   // alert(str); a=sss&b=ccc
+    var arrtmp=str.split("&");//将各参数分离形成参数数组 
+    for(i=0;i < arrtmp.length;i++)
+    { 
+        num=arrtmp[i].indexOf("="); 
+        if(num>0)
+        { 
+            name=arrtmp[i].substring(0,num);//取得参数名称 
+            value=arrtmp[i].substr(num+1);//取得参数值 
+            this[name]=value;//定义对象属性并初始化 i
+            //alert(name);
+            //alert(this[name]);
+       } 
+       
+      
+    } 
+   
+}
+	
+	
+	
+    //��ȡ request ֵ
+    function QueryStrings()
+{       //alert("test");
+    //����������󲢳�ʼ�� 
+    var name,value,i,temp;
+    var gpsinfo = new Array();
+    var str=location.href;//����������ַ��URL�� 
+    var num=str.indexOf("?") ;
+    str=str.substr(num+1);//��ȡ��?������Ĳ����� 
+    //alert(str); a=sss&b=ccc
+    
+    //get operation number
+    num = str.indexOf("=");
+    var operation = str.substring(num + 1,num + 2);
+	this.operation = operation;
+    str = str.substr(num + 1);
+    var arrtmp=str.split("&");//�������������γɲ�������
+    
+    // handle direction route
+    var mlat;
+    var mlng;
+    var dlng;
+    var dlat;
+    if(operation == 1){
+        // get start location
+        var i = 0;
+        while(i < arrtmp[0].length){
+            if(arrtmp[0][i] != "="){
+                i++;
+            }
+            else{
+                var j = i + 1;
+                while(arrtmp[0][i] != ","){
+                    i++;
+                }
+                mlat = arrtmp[0].substring(j,i);
+                mlng = arrtmp[0].substr(i + 1);
+            }
+        }
+        // get destination location
+        i = 0;
+        while(i < arrtmp[1].length){
+            if(arrtmp[1][i] != "="){
+                i++;
+            }
+            else{
+                var j = i + 1;
+                while(arrtmp[1][i] != ","){
+                    i++;
+                }
+                dlat = arrtmp[1].substring(j,i);
+                dlng = arrtmp[1].substr(i + 1);
+            }
+        }
+    }
+    
+    // handle multiple stores gps information
+    else{
+        for(i=0;i < arrtmp.length;i++)
+        {
+            num=arrtmp[i].indexOf("=");
+            if(num>0)
+            {
+                //name=arrtmp[i].substring(0,num);//ȡ�ò�������
+                temp =arrtmp[i].substr(num+1);//ȡ�ò���ֵ
+                value = temp.split(","); // split to get lattitude and longtitude
+                //gpsinfo[i][0] = value[0];
+                //gpsinfo[i][1] = value[1];
+				
+				
+                //this[name]=value;//����������Բ���ʼ�� i
+                //alert(name);
+                //alert(this[name]);
+            }
+        }
+		this.gpsinfo = gpsinfo;
+    }
+}
+    </script>
+  </head>
+  <body onLoad="initialize()">
+      <div id="map-canvas"></div>
+  </body>
+</html>

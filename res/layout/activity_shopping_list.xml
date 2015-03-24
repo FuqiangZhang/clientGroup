@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.group5.client.menu.ShoppingListActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rl_searchBar_shoppinglist"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#0065ff"
+        android:gravity="top" >
+
+        <TextView
+            android:id="@+id/tv_shoppinglistshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:text="ShoppingList"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/iv_backtomain"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/menu_home" />
+
+    </RelativeLayout>
+
+    <com.group5.widget.SlideCutListView
+        android:id="@+id/lv_products_shoppinglist"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/rl_searchBar_shoppinglist" >
+    </com.group5.widget.SlideCutListView>
+
+</RelativeLayout>

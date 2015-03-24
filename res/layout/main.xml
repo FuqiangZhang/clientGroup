@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainlayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:gravity="top" >
+
+    <RelativeLayout
+        android:id="@+id/rl_searchBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0065ff"
+        android:gravity="top" >
+
+        <SearchView
+            android:id="@+id/sv_searchProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/iv_opencamera" >
+        </SearchView>
+
+        <ImageView
+            android:id="@+id/iv_opencamera"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@+id/iv_shoppingList"
+            android:background="#0065ff"
+            android:src="@drawable/menu_barcode" />
+
+        <ImageView
+            android:id="@+id/iv_shoppingList"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="#0065ff"
+            android:src="@drawable/menu_shoppinglist" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_selectedStore"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/rl_searchBar"
+        android:gravity="top" >
+
+        <TextView
+            android:id="@+id/iv_SelectStore"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/textview_border"
+            android:gravity="center"
+            android:text="Select Store"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#0065ff"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/rl_selectedStore" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <com.group5.widget.SlideCutListView
+                        android:id="@+id/lv_products_search_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+                    </com.group5.widget.SlideCutListView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/bt_select_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:text="Select Favorite" />
+
+                    <com.group5.widget.SlideCutListView
+                        android:id="@+id/lv_product_search_favorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+                    </com.group5.widget.SlideCutListView>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</RelativeLayout>
